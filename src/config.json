@@ -1,0 +1,20 @@
+{
+    "localStorage": "dev.csqrl.crx-new-tab",
+
+    "endpoints": {
+        "unsplash": "https://europe-west1-figma-imagesplash.cloudfunctions.net/unsplash-random",
+        "search": "https://google.com/search?q=%s"
+    },
+
+    "webstore": {
+        "name": "Chrome Web Store",
+        "url": "https://chrome.google.com/webstore/category/extensions"
+    },
+
+    "flags": {
+        "enableDarkMode": true,
+        "enableDarkModeDev": false,
+        "enableEscapeUnfocusSearch": true,
+        "enableSlashFocusSearch": true
+    }
+}

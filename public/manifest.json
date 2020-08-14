@@ -1,0 +1,19 @@
+{
+  "name": "New Tab by ClockworkSquirrel",
+  "short_name": "New Tab",
+  "description": "New Tab Page replacement for Chromium-based browsers by ClockworkSquirrel",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "author": "ClockworkSquirrel",
+  "icons": {
+    "128": "assets/icon-128px.png",
+    "48": "assets/icon-48px.png",
+    "38": "assets/icon-38px.png",
+    "19": "assets/icon-19px.png",
+    "16": "assets/icon-16px.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": []
+}
