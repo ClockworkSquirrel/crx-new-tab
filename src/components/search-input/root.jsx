@@ -1,29 +1,31 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useState } from "react"
+import Config from "../../config.json"
 
 import { view } from "@risingstack/react-easy-state"
 import DefaultStore from "../../state/store"
 
-import { InputBase, IconButton, makeStyles, useTheme } from "@material-ui/core"
-import KeybindDisplay from "../keybind-display"
+import { InputBase, makeStyles, useTheme } from "@material-ui/core"
 
-import Config from "../../config.json"
+import WebstoreButton from "./webstore-button"
 
 import GoogleColourIcon from "../icons/google-colour-icon"
 import GoogleIcon from "../icons/google-icon"
 
+const rootTransition = theme => `${theme.transitions.easing.easeOut} ${theme.transitions.duration.shortest}ms`
 const useStyles = makeStyles(theme => ({
     root: {
         display: "flex",
         width: "100%",
         padding: theme.spacing(1, 1, 1, 2),
-        border: `1px solid ${theme.palette.divider}`,
         borderRadius: theme.shape.borderRadius * 2,
         alignItems: "center",
         cursor: "text",
-        transition: `all ${theme.transitions.easing.easeOut} ${theme.transitions.duration.shortest}ms`,
+        transition: `background-color ${rootTransition(theme)}, box-shadow ${rootTransition(theme)}, border ${rootTransition(theme)}`,
         backgroundColor: theme.palette.background.default,
+        border: `1px solid ${theme.palette.background.default}`,
 
         "&:focus-within": {
+            border: `1px solid ${theme.palette.divider}`,
             boxShadow: theme.shadows[3],
             backgroundColor: theme.palette.background.paper
         }
@@ -33,13 +35,6 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(0, 1, 0, 2),
         display: "block",
         height: "100%"
-    },
-    keybindDisplay: {
-        margin: theme.spacing(0, 1, 0, 0),
-
-        [theme.breakpoints.only("xs")]: {
-            display: "none"
-        }
     }
 }))
 
@@ -47,7 +42,9 @@ const SearchInputRoot = () => {
     const classes = useStyles()
     const theme = useTheme()
 
+    const [searchText, setSearchText] = useState("")
     const searchInputRef = useRef(null)
+
     const submitQuery = evt => {
         if (evt.which === 13) {
             evt.preventDefault()
@@ -64,14 +61,24 @@ const SearchInputRoot = () => {
         }
     }
 
+    const onInputChanged = evt => {
+        evt.preventDefault()
+        setSearchText(evt.target.value)
+    }
+
     useEffect(() => {
-        DefaultStore.focusSearchEvent.addEventListener("focus", () => {
+        DefaultStore.focusSearchEvent.addEventListener("focus", evt => {
+            if (evt.detail)
+                setSearchText(`${searchText}${evt.detail}`)
+
             searchInputRef.current.focus()
         })
 
         DefaultStore.focusSearchEvent.addEventListener("blur", () => {
             searchInputRef.current.blur()
         })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -90,22 +97,11 @@ const SearchInputRoot = () => {
                 autoComplete="off"
                 inputRef={searchInputRef}
                 onKeyPress={submitQuery}
-                id="search"
+                value={searchText}
+                onChange={onInputChanged}
             />
 
-            {
-                Config.flags.enableSlashFocusSearch
-                    ? (
-                        <KeybindDisplay className={classes.keybindDisplay}>
-                            {"/"}
-                        </KeybindDisplay>
-                    )
-                    : ""
-            }
-
-            <IconButton href={Config.webstore.url} rel="noopener noreferrer">
-                <img src={"/assets/webstore.png"} alt={Config.webstore.name} width={24} height={24} />
-            </IconButton>
+            <WebstoreButton />
         </div>
     )
 }

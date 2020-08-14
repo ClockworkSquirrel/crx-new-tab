@@ -36,15 +36,10 @@ const App = () => {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches
 
     useEffect(() => {
-        window.addEventListener("keydown", evt => {
-            if (evt.target === document.body && evt.key === "/") {
-                if (!Config.flags.enableSlashFocusSearch) return
-
-                evt.preventDefault()
+        document.addEventListener("keydown", evt => {
+            if (evt.target === document.body) {
                 DefaultStore.actions.focusSearch()
             } else if (evt.target !== document.body && evt.key === "Escape") {
-                if (!Config.flags.enableEscapeUnfocusSearch) return
-
                 evt.preventDefault()
                 DefaultStore.actions.unfocusSearch()
             }

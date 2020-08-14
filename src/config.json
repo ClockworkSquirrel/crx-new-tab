@@ -7,14 +7,22 @@
     },
 
     "webstore": {
-        "name": "Chrome Web Store",
-        "url": "https://chrome.google.com/webstore/category/extensions"
+        "chrome": {
+            "name": "Chrome Web Store",
+            "url": "https://chrome.google.com/webstore/category/extensions"
+        },
+        "firefox": {
+            "name": "Firefox Add-ons",
+            "url": "https://addons.mozilla.org/"
+        },
+        "edge": {
+            "name": "Edge Add-ons",
+            "url": "https://microsoftedge.microsoft.com/addons"
+        }
     },
 
     "flags": {
         "enableDarkMode": true,
-        "enableDarkModeDev": false,
-        "enableEscapeUnfocusSearch": true,
-        "enableSlashFocusSearch": true
+        "enableDarkModeDev": true
     }
 }
