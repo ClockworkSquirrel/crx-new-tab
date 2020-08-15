@@ -37,11 +37,11 @@ const App = () => {
 
     useEffect(() => {
         document.addEventListener("keydown", evt => {
-            if (evt.target === document.body) {
-                DefaultStore.actions.focusSearch()
-            } else if (evt.target !== document.body && evt.key === "Escape") {
+            if (evt.key === "Escape") {
                 evt.preventDefault()
                 DefaultStore.actions.unfocusSearch()
+            } else if (evt.target === document.body) {
+                DefaultStore.actions.focusSearch()
             }
         }, false)
     }, [])

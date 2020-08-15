@@ -1,5 +1,6 @@
 {
   "name": "crx-new-tab",
+  "description": "New Tab Page replacement for Chromium-based browsers by ClockworkSquirrel",
   "version": "0.0.1",
   "private": true,
   "homepage": "/",
@@ -21,6 +22,7 @@
     "@testing-library/user-event": "^7.2.1",
     "colorthief": "^2.3.2",
     "fontsource-lexend-deca": "^3.0.5",
+    "my-name-is-url": "^1.4.0",
     "react": "^16.13.1",
     "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",

@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react"
 import Config from "../../config.json"
 
+import URLs from "my-name-is-url"
+
 import { view } from "@risingstack/react-easy-state"
 import DefaultStore from "../../state/store"
 
@@ -46,12 +48,23 @@ const SearchInputRoot = () => {
     const searchInputRef = useRef(null)
 
     const submitQuery = evt => {
-        if (evt.which === 13) {
+        if (evt.key === "Enter") {
             evt.preventDefault()
 
             try {
-                const typedUrl = new URL(evt.target.value)
-                window.location.assign(typedUrl.toString())
+                const detectedUrl = URLs(evt.target.value).get()?.[0]
+
+                if (!detectedUrl)
+                    throw new Error("No URLs matched")
+
+                if (evt.target.value.trim() !== detectedUrl)
+                    throw new Error("Search input contained more than just a URL")
+
+                if (detectedUrl.match(/^(?:[a-z]+:)?\/\//i)) {
+                    window.location.assign(detectedUrl)
+                } else {
+                    window.location.assign(`http://${detectedUrl}`)
+                }
             } catch (err) {
                 const searchUrl = new URL(Config.endpoints.search)
                 searchUrl.searchParams.set("q", evt.target.value)
@@ -67,18 +80,8 @@ const SearchInputRoot = () => {
     }
 
     useEffect(() => {
-        DefaultStore.focusSearchEvent.addEventListener("focus", evt => {
-            if (evt.detail)
-                setSearchText(`${searchText}${evt.detail}`)
-
-            searchInputRef.current.focus()
-        })
-
-        DefaultStore.focusSearchEvent.addEventListener("blur", () => {
-            searchInputRef.current.blur()
-        })
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        DefaultStore.focusSearchEvent.addEventListener("focus", () => searchInputRef.current.focus())
+        DefaultStore.focusSearchEvent.addEventListener("blur", () => searchInputRef.current.blur())
     }, [])
 
     return (
