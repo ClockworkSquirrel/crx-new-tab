@@ -41,6 +41,9 @@ const App = () => {
                 evt.preventDefault()
                 DefaultStore.actions.unfocusSearch()
             } else if (evt.target === document.body) {
+                if (evt.key === "Enter")
+                    return evt.preventDefault()
+
                 DefaultStore.actions.focusSearch()
             }
         }, false)

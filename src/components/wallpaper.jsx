@@ -25,12 +25,13 @@ const InternalWallpaperDiv = ({ imageUrl, children }) => {
     const [showBackground, setShowBackground] = useState(false)
 
     useEffect(() => {
-        if (!imageUrl) return
+        if (!imageUrl || showBackground) return
 
         const image = new Image()
+        image.loading = "eager"
         image.onload = () => setShowBackground(true)
         image.src = imageUrl
-    }, [imageUrl])
+    }, [imageUrl, showBackground])
 
     return (
         <Fade in={showBackground}>
@@ -42,7 +43,7 @@ const InternalWallpaperDiv = ({ imageUrl, children }) => {
 }
 
 const Wallpaper = () => {
-    const [wallpaperData, setWallpaperData] = useState()
+    const [wallpaperData, setWallpaperData] = useState([])
 
     useEffect(() => {
         DefaultStore.actions.fetchWallpaper()

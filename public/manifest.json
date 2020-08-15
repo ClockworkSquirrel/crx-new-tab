@@ -15,5 +15,8 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "permissions": []
+  "permissions": [
+    "https://suggestqueries.google.com/",
+    "https://europe-west1-figma-imagesplash.cloudfunctions.net/"
+  ]
 }

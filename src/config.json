@@ -3,7 +3,8 @@
 
     "endpoints": {
         "unsplash": "https://europe-west1-figma-imagesplash.cloudfunctions.net/unsplash-random",
-        "search": "https://google.com/search?q=%s"
+        "search": "https://google.com/search",
+        "autocomplete": "https://suggestqueries.google.com/complete/search?client=chrome"
     },
 
     "webstore": {
