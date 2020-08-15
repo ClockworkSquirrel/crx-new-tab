@@ -1,6 +1,10 @@
 # New Tab by ClockworkSquirrel
 A new tab page replacement for Chromium-based browsers.
 
+A live demo is available on Glitch. Be aware it is missing some features, due to lack of Chrome APIs. Install the extension for full functionality:
+
+https://tungsten-colorful-fuel.glitch.me/
+
 ## Design
 New Tab takes inspiration from Google's Material Design language to deliver a beautiful new tab experience. The minimalistic design allows users to jump straight into the action, with handy links to Google services, in addition to a personally curated list of websites.
 
