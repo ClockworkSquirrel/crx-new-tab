@@ -16,6 +16,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@meltwater/fetch-favicon": "^1.0.4",
     "@risingstack/react-easy-state": "^6.3.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",

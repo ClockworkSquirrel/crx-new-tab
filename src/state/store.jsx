@@ -8,7 +8,18 @@ const DefaultStore = store({
     focusSearchEvent: new EventTarget(),
 
     persist: {
-        wallpaperTags: ["landscapes", "textures", "art", "life", "earth", "cityscapes", "geometric", "animals", "nature"],
+        wallpaperTags: [
+            "landscapes",
+            "textures",
+            "art",
+            "life",
+            "earth",
+            "cityscapes",
+            "geometric",
+            "animals",
+            "nature"
+        ],
+
         wallpaperData: {
             fetched: null,
             imageUrl: null,
@@ -16,6 +27,8 @@ const DefaultStore = store({
             userName: null,
             userImageUrl: null
         },
+
+        webstoreIcon: null,
 
         ...savedState
     },
@@ -64,7 +77,23 @@ const DefaultStore = store({
             DefaultStore.focusSearchEvent.dispatchEvent(searchEvent)
         },
 
-        unfocusSearch: async () => DefaultStore.actions.focusSearch(false)
+        unfocusSearch: async () => DefaultStore.actions.focusSearch(false),
+
+        fetchFavicon: async (url = "", preferredSize = "32x32") => {
+            const fullUrl = new URL(url)
+
+            return fetch(`${Config.endpoints.favicons}/${fullUrl.hostname}`)
+                .then(res => res.json())
+                .then(data => {
+                    for (const icon of data?.icons ?? []) {
+                        if (icon?.sizes === preferredSize)
+                            return icon?.src
+                    }
+
+                    return data?.icons?.[0]?.src
+                })
+                .catch(err => console.error(err))
+        }
     }
 })
 

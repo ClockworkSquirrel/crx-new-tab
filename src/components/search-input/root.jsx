@@ -213,7 +213,7 @@ const SearchInputRoot = () => {
                 <WebstoreButton />
             </div>
 
-            <Collapse in={searchFocused && searchSuggestions.length}>
+            <Collapse in={searchFocused && searchSuggestions?.length}>
                 <div className={classes.suggestRoot}>
                     {
                         searchSuggestions?.map((suggestion, index) =>

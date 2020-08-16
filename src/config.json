@@ -4,13 +4,14 @@
     "endpoints": {
         "unsplash": "https://europe-west1-figma-imagesplash.cloudfunctions.net/unsplash-random",
         "search": "https://google.com/search",
-        "autocomplete": "https://suggestqueries.google.com/complete/search?client=chrome"
+        "autocomplete": "https://suggestqueries.google.com/complete/search?client=chrome",
+        "favicons": "https://favicongrabber.com/api/grab"
     },
 
     "webstore": {
         "chrome": {
             "name": "Chrome Web Store",
-            "url": "https://chrome.google.com/webstore/category/extensions"
+            "url": "https://chrome.google.com/webstore/category/extensions/"
         },
         "firefox": {
             "name": "Firefox Add-ons",
@@ -18,7 +19,11 @@
         },
         "edge": {
             "name": "Edge Add-ons",
-            "url": "https://microsoftedge.microsoft.com/addons"
+            "url": "https://microsoftedge.microsoft.com/addons/"
+        },
+        "opera": {
+            "name": "Opera Add-ons",
+            "url": "https://addons.opera.com/en-gb/extensions/"
         }
     },
 

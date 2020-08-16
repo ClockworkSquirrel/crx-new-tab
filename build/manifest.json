@@ -17,6 +17,7 @@
   },
   "permissions": [
     "https://suggestqueries.google.com/",
-    "https://europe-west1-figma-imagesplash.cloudfunctions.net/"
+    "https://europe-west1-figma-imagesplash.cloudfunctions.net/",
+    "https://favicongrabber.com/"
   ]
 }
